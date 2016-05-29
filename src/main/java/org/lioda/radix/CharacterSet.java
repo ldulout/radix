@@ -11,6 +11,7 @@ public class CharacterSet implements Iterable<Character> {
     }
 
     public static CharacterSet fromRange(char first, char last) {
+        if (last < first) throw new IllegalArgumentException("first char must be least than last");
         return new CharacterSet(listFromRange(first, last));
     }
 

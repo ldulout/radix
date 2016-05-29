@@ -10,7 +10,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CharacterSetTest {
     @Test
     public void createFromCharacterList() {
-        assertThat(CharacterSet.fromCharacters('a','b','c'), contains('a','b','c'));
+        assertThat(CharacterSet.fromCharacters('a', 'b', 'c'), contains('a','b','c'));
+    }
+
+    @Test
+    public void createFromRange() {
+        assertThat(CharacterSet.fromRange('0', '9'), contains('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
     }
 
     @Test
@@ -21,11 +26,6 @@ public class CharacterSetTest {
     @Test
     public void hasSize() {
         assertThat(CharacterSet.fromRange('0', '9').size(), is(10));
-    }
-
-    @Test
-    public void createFromRange() {
-        assertThat(CharacterSet.fromRange('0', '9'), contains('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
     }
 
     @Test
@@ -49,5 +49,10 @@ public class CharacterSetTest {
         Iterator<Character> iterator = CharacterSet.fromRange('0', '2').iterator();
         iterator.next();
         iterator.remove();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void charactersInRangeHaveToBeSorted() {
+        assertThat(CharacterSet.fromRange('2', '0'), contains('0', '1', '2'));
     }
 }

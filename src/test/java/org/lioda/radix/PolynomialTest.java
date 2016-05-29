@@ -17,7 +17,7 @@ public class PolynomialTest {
         return result;
     }
 
-    private final List<Character> hexCharacters = chars('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F');
+    private final CharacterSet hexCharacters = CharacterSet.fromRange('0','9').addRange('A', 'F');
 
     @Test
     public void polynomialStringifyInHexadecimal() {
@@ -41,13 +41,13 @@ public class PolynomialTest {
     @Test
     public void polynomialStringifyWithAnyCharacterList() {
         Polynomial polynomial = new Polynomial("11",10);
-        assertThat(polynomial.toString(4, chars('a', 'b', 'c', 'z')), is("cz"));
+        assertThat(polynomial.toString(4, CharacterSet.fromCharacters('a', 'b', 'c', 'z')), is("cz"));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void polynomialStringifyThrowsExceptionIfCharactersHasABadSize() {
         Polynomial polynomial = new Polynomial("11",10);
-        assertThat(polynomial.toString(4, chars('a', 'b', 'z')), is("cz"));
+        assertThat(polynomial.toString(4, CharacterSet.fromCharacters('a', 'b', 'z')), is("cz"));
     }
     @Test(expected = IllegalArgumentException.class)
     public void polynomialStringifyThrowsExceptionIfCharactersIsNull() {

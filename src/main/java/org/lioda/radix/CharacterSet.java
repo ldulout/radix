@@ -52,4 +52,12 @@ public class CharacterSet implements Iterable<Character> {
     public char get(int i) {
         return list.get(i);
     }
+
+    public int size() {
+        return list.size();
+    }
+
+    public String toString() {
+        return list.toString();
+    }
 }

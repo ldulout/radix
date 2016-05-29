@@ -23,21 +23,25 @@ public class Polynomial {
         BigInteger rad = new BigInteger(String.valueOf(radix));
         List<Integer> result = new ArrayList<Integer>();
         BigInteger q = number;
-        int i = 0;
-        for (;q.compareTo(BigInteger.ZERO) == 1;++i) {
-            BigInteger r = q.mod(rad);
+        for (;q.compareTo(BigInteger.ZERO) == 1;) {
+            result.add(q.mod(rad).intValue());
             q = q.divide(rad);
-            result.add(r.intValue());
         }
         Collections.reverse(result);
         return result;
     }
 
     public String toString(int radix, List<Character> chars) {
+        checkCharsSize(radix, chars);
         StringBuilder result = new StringBuilder();
         for (int digit : toDigits(radix)) {
             result.append(chars.get(digit));
         }
         return result.toString();
+    }
+
+    private void checkCharsSize(int radix, List<Character> chars) {
+        if (chars == null) throw new IllegalArgumentException("The characters set must not be null");
+        if (chars.size() != radix) throw new IllegalArgumentException("It needs "+radix+" characters but was "+chars);
     }
 }

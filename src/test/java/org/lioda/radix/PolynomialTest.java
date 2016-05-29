@@ -2,20 +2,11 @@ package org.lioda.radix;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
 
 public class PolynomialTest {
-    private static List<Character> chars(char... chars) {
-        List<Character> result = new ArrayList<Character>(chars.length);
-        for (char c : chars) {
-            result.add(c);
-        }
-        return result;
-    }
 
     private final CharacterSet hexCharacters = CharacterSet.fromRange('0','9').addRange('A', 'F');
 

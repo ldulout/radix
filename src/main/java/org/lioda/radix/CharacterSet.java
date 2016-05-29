@@ -6,8 +6,8 @@ import java.util.*;
  * Set of characters.
  */
 public class CharacterSet implements Iterable<Character> {
-    public static CharacterSet fromCharacters(Character... chars) {
-        return new CharacterSet(Arrays.asList(chars));
+    public static CharacterSet fromCharacters(char... chars) {
+        return new CharacterSet(listFromChars(chars));
     }
 
     public static CharacterSet fromRange(char first, char last) {
@@ -15,9 +15,17 @@ public class CharacterSet implements Iterable<Character> {
         return new CharacterSet(listFromRange(first, last));
     }
 
-    private static ArrayList<Character> listFromRange(char first, char last) {
+    private static List<Character> listFromRange(char first, char last) {
         ArrayList<Character> characters = new ArrayList<Character>();
         for (char c = first ; c <= last ; ++c) {
+            characters.add(c);
+        }
+        return characters;
+    }
+
+    private static List<Character> listFromChars(char... chars) {
+        List<Character> characters = new ArrayList<Character>(chars.length);
+        for (char c : chars) {
             characters.add(c);
         }
         return characters;
@@ -39,8 +47,8 @@ public class CharacterSet implements Iterable<Character> {
         return new CharacterSet(addToList(listFromRange(first,last)));
     }
 
-    public CharacterSet addCharacters(Character... chars) {
-        return new CharacterSet(addToList(Arrays.asList(chars)));
+    public CharacterSet addCharacters(char... chars) {
+        return new CharacterSet(addToList(listFromChars(chars)));
     }
 
     private List<Character> addToList(List<Character> other) {

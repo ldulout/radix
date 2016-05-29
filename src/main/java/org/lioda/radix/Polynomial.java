@@ -32,4 +32,12 @@ public class Polynomial {
         Collections.reverse(result);
         return result;
     }
+
+    public String toString(int radix, List<Character> chars) {
+        StringBuilder result = new StringBuilder();
+        for (int digit : toDigits(radix)) {
+            result.append(chars.get(digit));
+        }
+        return result.toString();
+    }
 }

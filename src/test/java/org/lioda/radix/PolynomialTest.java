@@ -2,15 +2,28 @@ package org.lioda.radix;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PolynomialTest {
+    private static List<Character> chars(char... chars) {
+        List<Character> result = new ArrayList<Character>(chars.length);
+        for (char c : chars) {
+            result.add(c);
+        }
+        return result;
+    }
+
+    private final List<Character> hexCharacters = chars('0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f');
 
     @Test
-    public void polynomialStringifyInAnyRadix() {
+    public void polynomialStringifyInHexadecimal() {
         Polynomial polynomial = new Polynomial("123",10);
         assertThat(polynomial.toHexString(), is("7b"));
+        assertThat(polynomial.toString(16, hexCharacters), is("7b"));
     }
 
     @Test
@@ -25,4 +38,9 @@ public class PolynomialTest {
         assertThat(polynomial.toDigits(47), contains(2, 29));
     }
 
+    @Test
+    public void polynomialStringifyWithAnyCharacterList() {
+        Polynomial polynomial = new Polynomial("11",10);
+        assertThat(polynomial.toString(4, chars('a', 'b', 'c', 'z')), is("cz"));
+    }
 }

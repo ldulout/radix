@@ -14,8 +14,8 @@ public class Polynomial {
         this.number = new BigInteger(number, radix);
     }
 
-    public String toString(int radix) {
-        return number.toString(radix);
+    public String toHexString() {
+        return number.toString(16);
     }
 
 

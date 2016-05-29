@@ -10,13 +10,19 @@ public class PolynomialTest {
     @Test
     public void polynomialStringifyInAnyRadix() {
         Polynomial polynomial = new Polynomial("123",10);
-        assertThat(polynomial.toString(16), is("7b"));
+        assertThat(polynomial.toHexString(), is("7b"));
     }
 
     @Test
     public void polynomialToDigitsReturnsIterableOfDigits() {
         Polynomial polynomial = new Polynomial("123",10);
         assertThat(polynomial.toDigits(16), contains(7, 11));
+    }
+
+    @Test
+    public void polynomialCanProduceWithAnyRadix() {
+        Polynomial polynomial = new Polynomial("123",10);
+        assertThat(polynomial.toDigits(47), contains(2, 29));
     }
 
 }

@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Polynomial representation of a number, with any radix. Representation : d1 * radix ^ n + d2 * radix ^ (n-1) + ... + dn-1 * radix + dn.*/
+/**
+ * Polynomial representation of a number, with any radix. Representation : d1 * radix ^ n + d2 * radix ^ (n-1) + ... + dn-1 * radix + dn.
+ */
 public class Polynomial {
 
     private final BigInteger number;
@@ -18,34 +20,40 @@ public class Polynomial {
         return number.toString(16);
     }
 
-
-    public Iterable<Integer> toDigits(int radix) {
+    public List<Digit> toPolynomial(int radix) {
         BigInteger rad = new BigInteger(String.valueOf(radix));
-        List<Integer> result = new ArrayList<Integer>();
+        List<Digit> result = new ArrayList<Digit>();
         BigInteger q = number;
-        for (;q.compareTo(BigInteger.ZERO) == 1;) {
-            result.add(q.mod(rad).intValue());
+        for (int i = 0; q.compareTo(BigInteger.ZERO) == 1; ++i) {
+            result.add(new Digit(q.mod(rad), new Coefficient(rad, i)));
             q = q.divide(rad);
         }
         Collections.reverse(result);
         return result;
     }
 
+    public Iterable<Integer> toDigits(int radix) {
+        List<Integer> result = new ArrayList<Integer>();
+        for (Digit digit : toPolynomial(radix)) {
+            result.add(digit.digitValue());
+        }
+        return result;
+    }
+
     public String toString(int radix, CharacterSet characterSet) {
         checkCharsSize(radix, characterSet);
         StringBuilder result = new StringBuilder();
-        for (int digit : toDigits(radix)) {
-            result.append(characterSet.get(digit));
+        for (Digit digit : toPolynomial(radix)) {
+            result.append(digit.toChar(characterSet));
         }
         return result.toString();
     }
 
     private void checkCharsSize(int radix, CharacterSet characterSet) {
         if (characterSet == null) throw new IllegalArgumentException("The characters set must not be null");
-        if (characterSet.size() != radix) throw new IllegalArgumentException("It needs "+radix+" characters but was "+characterSet);
+        if (characterSet.size() != radix)
+            throw new IllegalArgumentException("It needs " + radix + " characters but was " + characterSet);
     }
 
-    public List<Digit> toPolynomial(int radix) {
-        return null;
-    }
+
 }

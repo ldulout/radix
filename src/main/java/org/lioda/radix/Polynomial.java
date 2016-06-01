@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Polynomial representation of a number, with any radix. */
+/** Polynomial representation of a number, with any radix. Representation : d1 * radix ^ n + d2 * radix ^ (n-1) + ... + dn-1 * radix + dn.*/
 public class Polynomial {
 
     private final BigInteger number;
@@ -43,5 +43,9 @@ public class Polynomial {
     private void checkCharsSize(int radix, CharacterSet characterSet) {
         if (characterSet == null) throw new IllegalArgumentException("The characters set must not be null");
         if (characterSet.size() != radix) throw new IllegalArgumentException("It needs "+radix+" characters but was "+characterSet);
+    }
+
+    public List<Digit> toPolynomial(int radix) {
+        return null;
     }
 }

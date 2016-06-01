@@ -24,7 +24,7 @@ public class PolynomialTest {
     }
 
     @Test
-    public void polynomialCanProduceWithAnyRadix() {
+    public void polynomialCanProduceDigitsWithAnyRadix() {
         Polynomial polynomial = new Polynomial("123",10);
         assertThat(polynomial.toDigits(47), contains(2, 29));
     }
@@ -44,5 +44,11 @@ public class PolynomialTest {
     public void polynomialStringifyThrowsExceptionIfCharactersIsNull() {
         Polynomial polynomial = new Polynomial("11",10);
         assertThat(polynomial.toString(4, null), is("cz"));
+    }
+
+    @Test
+    public void polynomialCanProduceCoefficientsWithAnyRadix() {
+        Polynomial polynomial = new Polynomial("123",10);
+        assertThat(polynomial.toPolynomial(47), contains(new Digit(2, new Coefficient(47,1)), new Digit(29, new Coefficient(47,0))));
     }
 }

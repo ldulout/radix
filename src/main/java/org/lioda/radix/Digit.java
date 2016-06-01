@@ -11,4 +11,8 @@ public class Digit {
         this.value = value;
         this.coef = coef;
     }
+
+    public String toString() {
+        return value+"*"+coef;
+    }
 }

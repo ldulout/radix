@@ -6,6 +6,10 @@ import java.util.*;
  * Set of characters.
  */
 public class CharacterSet implements Iterable<Character> {
+    public static final CharacterSet HEXADECIMAL = fromRange('0','9').addRange('a','f');
+    public static final CharacterSet BINARY = fromRange('0','1');
+    public static final CharacterSet BASE_64 = fromRange('A','Z').addRange('a','z').addRange('0','9').addCharacters('+','/');
+
     public static CharacterSet fromCharacters(char... chars) {
         return new CharacterSet(listFromChars(chars));
     }

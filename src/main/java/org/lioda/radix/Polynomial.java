@@ -17,7 +17,7 @@ public class Polynomial {
     }
 
     public String toHexString() {
-        return number.toString(16);
+        return toString(16, CharacterSet.HEXADECIMAL);
     }
 
     public List<Digit> toPolynomial(int radix) {

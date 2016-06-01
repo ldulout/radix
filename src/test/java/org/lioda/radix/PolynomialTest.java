@@ -49,6 +49,19 @@ public class PolynomialTest {
     @Test
     public void polynomialCanProduceCoefficientsWithAnyRadix() {
         Polynomial polynomial = new Polynomial("123",10);
-        assertThat(polynomial.toPolynomial(47), contains(new Digit(2, new Coefficient(47,1)), new Digit(29, new Coefficient(47,0))));
+        assertThat(polynomial.toPolynomial(47), contains(new Digit(2, new Coefficient(47, 1)), new Digit(29, new Coefficient(47, 0))));
+    }
+
+    @Test
+    public void binaryDisplay() {
+        Polynomial polynomial = new Polynomial("123",10);
+        assertThat(polynomial.toString(2, CharacterSet.BINARY), is("1111011"));
+    }
+
+    @Test
+    public void bas64Display() {
+        Polynomial polynomial = new Polynomial("123456",10);
+        assertThat(polynomial.toDigits(64), contains(30,9,0));
+        assertThat(polynomial.toString(64, CharacterSet.BASE_64), is("eJA"));
     }
 }
